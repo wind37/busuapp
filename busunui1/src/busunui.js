@@ -50,13 +50,6 @@ var ChipmunkBaseLayer = function() {
 	this._subtitle = "No Subtitle";
 
 	// Menu to toggle debug physics on / off
-    /*
-    var item = cc.MenuItemFont.create("Physics On/Off", this.onToggleDebug, this);
-    item.setFontSize(24);
-    var menu = cc.Menu.create( item );
-    this.addChild( menu );
-    menu.setPosition( cc._p( winSize.width-100, winSize.height-90 )  );
-    */
 
     // Create the initial space
 	this.space = new cp.Space();
@@ -89,32 +82,6 @@ ChipmunkBaseLayer.prototype.onEnter = function() {
 
     sys.dumpRoot();
     sys.garbageCollect();
-};
-
-ChipmunkBaseLayer.prototype.onCleanup = function() {
-	// Not compulsory, but recommended: cleanup the scene
-	this.unscheduleUpdate();
-};
-
-ChipmunkBaseLayer.prototype.onRestartCallback = function (sender) {
-	this.onCleanup();
-    var s = new ChipmunkTestScene();
-    s.addChild(restartChipmunkTest());
-    director.replaceScene(s);
-};
-
-ChipmunkBaseLayer.prototype.onNextCallback = function (sender) {
-	this.onCleanup();
-    var s = new ChipmunkTestScene();
-    s.addChild(nextChipmunkTest());
-    director.replaceScene(s);
-};
-
-ChipmunkBaseLayer.prototype.onBackCallback = function (sender) {
-	this.onCleanup();
-    var s = new ChipmunkTestScene();
-    s.addChild(previousChipmunkTest());
-    director.replaceScene(s);
 };
 
 // automation
@@ -245,10 +212,6 @@ ChipmunkTestScene.prototype.runThisTest = function () {
 var arrayOfChipmunkTest =  [
 		ChipmunkSprite
 		];
-
-if( sys.platform !== 'browser' ) {
-	arrayOfChipmunkTest.push( ChipmunkCollisionTestB );
-}
 
 var nextChipmunkTest = function () {
     chipmunkTestSceneIdx++;
