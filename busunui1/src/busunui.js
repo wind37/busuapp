@@ -75,6 +75,8 @@ ChipmunkBaseLayer.prototype.onToggleDebug = function(sender) {
 //
 // Instance 'base' methods
 // XXX: Should be defined after "cc.inherits"
+
+
 //
 ChipmunkBaseLayer.prototype.onEnter = function() {
 	BaseTestLayer.prototype.onEnter.call(this);
