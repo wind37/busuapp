@@ -144,12 +144,16 @@ ChipmunkSprite.prototype.initPhysics = function() {
 };
 
 ChipmunkSprite.prototype.createPhysicsSprite = function( pos ) {
-	var body = new cp.Body(1, cp.momentForBox(1, 48, 108) );
+    var size = cc.size(48, 104);
+	var body = new cp.Body(1, cp.momentForBox(1, size.width, size.height) );
 	body.setPos( pos );
 	this.space.addBody( body );
-	var shape = new cp.BoxShape( body, 48, 108);
+	var shape = new cp.BoxShape( body, size.width, size.height);
+
 	shape.setElasticity( 0.5 );
 	shape.setFriction( 0.5 );
+
+
 	this.space.addShape( shape );
 
 	var sprite = cc.PhysicsSprite.create("res/grossini.png");
