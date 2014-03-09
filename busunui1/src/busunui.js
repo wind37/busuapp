@@ -156,7 +156,9 @@ ChipmunkSprite.prototype.createPhysicsSprite = function( pos ) {
 
 	this.space.addShape( shape );
 
-	var sprite = cc.PhysicsSprite.create("res/grossini.png");
+	var sprite = cc.PhysicsSprite.create("res/makonui2.png");
+
+
 	sprite.setBody( body );
 	return sprite;
 };
