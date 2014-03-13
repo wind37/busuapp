@@ -151,21 +151,25 @@ ChipmunkSprite.prototype.createPhysicsSprite = function( pos ) {
 	var shape = new cp.BoxShape( body, size.width, size.height);
 
 
+
+
+
 	var sprite; 
 
-	if ((Math.random()*10) <= 0 ) {
+	if ((Math.random()*10) <= 1 ) {
 		shape.setElasticity( 1.0 );
 		shape.setFriction( 1.0 );
-		 sprite  = cc.PhysicsSprite.create("res/makonui3.png");
+		 sprite  = cc.PhysicsSprite.create("res/ikenui1.png");
 		// TODO harunui
-	} else if ((Math.random()*10) <= 6 ) {
+	} else if ((Math.random()*10) <= 3 ) {
 		shape.setElasticity( 0.9 );
-		shape.setFriction( 0.9 );
-		sprite  = cc.PhysicsSprite.create("res/rinnui1.png");
-	} else {
-		shape.setElasticity( 0.8 );
 		shape.setFriction( 0.8 );
 		sprite  = cc.PhysicsSprite.create("res/makonui3.png");
+
+	} else {
+		shape.setElasticity( 0.9 );
+		shape.setFriction( 0.9 );
+		sprite  = cc.PhysicsSprite.create("res/busunui1.png");
 	}
 
 	this.space.addShape( shape );
