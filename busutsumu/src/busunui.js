@@ -106,7 +106,7 @@ var ChipmunkSprite = function() {
 
 	this.addSprite = function( pos ) {
 		var sprite =  this.createPhysicsSprite( pos );
-		this.addChild( sprite );
+	    this.addChild( sprite );
 	};
 
 	this._title = 'Chipmunk Sprite Test';
@@ -150,18 +150,14 @@ ChipmunkSprite.prototype.createPhysicsSprite = function( pos ) {
 	this.space.addBody( body );
 	var shape = new cp.BoxShape( body, size.width, size.height);
 
-
-
-
-
 	var sprite; 
 
-	if ((Math.random()*10) <= 1 ) {
+	if ((Math.random()*10) <= 3 ) {
 		shape.setElasticity( 1.0 );
 		shape.setFriction( 1.0 );
 		 sprite  = cc.PhysicsSprite.create("res/ikenui1.png");
 		// TODO harunui
-	} else if ((Math.random()*10) <= 3 ) {
+	} else if ((Math.random()*10) <= 6 ) {
 		shape.setElasticity( 0.9 );
 		shape.setFriction( 0.8 );
 		sprite  = cc.PhysicsSprite.create("res/makonui3.png");
@@ -175,6 +171,7 @@ ChipmunkSprite.prototype.createPhysicsSprite = function( pos ) {
 	this.space.addShape( shape );
 
 	sprite.setBody( body );
+    
 	return sprite;
 };
 
