@@ -48,7 +48,8 @@ var ChipmunkBaseLayer = function() {
 
 	this._title =  "No title";
 	this._subtitle = "No Subtitle";
-
+    this._busuPoint = 0;
+    this._maxBusuCount  = 1000;
 	// Menu to toggle debug physics on / off
 
     // Create the initial space
@@ -82,6 +83,14 @@ ChipmunkBaseLayer.prototype.onEnter = function() {
 	BaseTestLayer.prototype.onEnter.call(this);
     //cc.base(this, 'onEnter');
 
+    var label = cc.LabelTTF.create("nui", "Arial", 20);
+    this.addChild( label, 100, BASE_TEST_TITLE_TAG);
+    label.setPosition(winSize.width / 2+40, winSize.height - 20);
+
+    this.label = cc.LabelTTF.create("0", "Arial", 20);
+    this.addChild(this.label, 100, BASE_TEST_TITLE_TAG);
+    this.label.setPosition(winSize.width / 2, winSize.height - 20);
+
     sys.dumpRoot();
     sys.garbageCollect();
 };
@@ -105,9 +114,22 @@ var ChipmunkSprite = function() {
 	//cc.base(this);
 
 	this.addSprite = function( pos ) {
-		var sprite =  this.createPhysicsSprite( pos );
-	    this.addChild( sprite );
+        if ( this.getChildrenCount() < this._maxBusuCount ) {
+		    var sprite =  this.createPhysicsSprite( pos );
+	        this.addChild( sprite );
+            this._busuPoint++;
+            this.label.setString(this._busuPoint);
+        }
+        // check fly-away busu
+        for ( var i=this.getChildren().length-1; i>=0; i-- ) {
+            var sp = this.getChildren()[i];
+            if ( winSize.width+100 < sp.getPositionX() || -100 > sp.getPositionX() ||
+                winSize.height+100 < sp.getPositionY() || -100 > sp.getPositionY()) {
+                sp.removeFromParent();
+            }
+        }
 	};
+
 
 	this._title = 'Chipmunk Sprite Test';
 	this._subtitle = 'Chipmunk + cocos2d sprites tests. Tap screen.';
@@ -134,8 +156,8 @@ ChipmunkSprite.prototype.initPhysics = function() {
 			];
 	for( var i=0; i < walls.length; i++ ) {
 		var shape = walls[i];
-		shape.setElasticity(1.7); // change here
-		shape.setFriction(1.1);
+		shape.setElasticity(1.6); // change here
+		shape.setFriction(1.2);
 		space.addStaticShape( shape );
 	}
 
@@ -154,7 +176,7 @@ ChipmunkSprite.prototype.createPhysicsSprite = function( pos ) {
 
 	if ((Math.random()*10) <= 3 ) {
 		shape.setElasticity( 1.0 );
-		shape.setFriction( 1.0 );
+		shape.setFriction( 1.1 );
 		 sprite  = cc.PhysicsSprite.create("res/ikenui1.png");
 		// TODO harunui
 	} else if ((Math.random()*10) <= 6 ) {
