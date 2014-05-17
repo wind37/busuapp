@@ -1,0 +1,15 @@
+{
+    "debugMode" : 1,
+    "showFPS" : false,
+    "frameRate" : 30,
+    "id" : "gameCanvas",
+    "renderMode" : 0,
+
+    "modules" : ["cocos2d","chipmunk"],
+
+    "jsList" : [
+        "chipmunk.js",
+        "res/resource.js",
+        "src/myApp.js"
+    ]
+}
